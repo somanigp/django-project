@@ -21,12 +21,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)&j2t@j)4dgbh)zqq2(pm$0p2ys7m@ko8l$60wp@0ddai3$ou!'
-
+# SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)&j2t@j)4dgbh)zqq2(pm$0p2ys7m@ko8l$60wp@0ddai3$ou!')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# On which servers this application can be run
+ALLOWED_HOSTS = [
+    # * initial . means sub-domains are allowed
+    ".railway.app", # https://xy.prod.railway.app is allowed.
+]
 
+# DEBUG is True for local only and thus adding localhost to ALLOWED_HOSTS list when running in local.
+if DEBUG:
+    ALLOWED_HOSTS += [
+        "127.0.0.1",
+        "localhost"
+    ]
 
 # Application definition : !* Smaller components that make the project 
 
