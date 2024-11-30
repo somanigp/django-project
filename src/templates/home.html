@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% comment %} block.super takes the original template block {% endcomment %}
+{% block page_title %} {{page_title}} - {{ block.super }} {% endblock page_title %}
+
+{% block content %}
+    <p> Home Page Content</p>
+
+
+    {% comment %} include other templates {% endcomment %}
+    {% include "snippets/welcome-user-msg.html" %}  
+    {% comment %} <p> {{request.user}}  {{request.method}}  {{request.user.is_authenticated}}</p>  {% endcomment %}
+    {% comment %} AnonymousUser GET False Comes from request  {% endcomment %}
+
+    <p> Page Visits : {{page_visit_count}}</p>
+    <p> Total Visits : {{total_visits_count}}</p>
+
+{% endblock content %}
+

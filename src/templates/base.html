@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> {% block page_title %} somanigp {% endblock page_title %} </title>
+</head>
+<body>
+
+    <h1>This is {{page_title}}!</h1>
+
+    {% comment %} 'content' is name of the block. {% endcomment %}
+    {% block content %}  
+    {% comment %} This gets replaced in the file which extends this file. {% endcomment %}
+    <p> This will be replaced. </p>
+    {% endblock content %}
+
+    <p> Come Again</p>
+
+</body>
+</html>
