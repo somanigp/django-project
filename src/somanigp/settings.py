@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import os # * Use Operating System that Python has access to.
+# import os # * Use Operating System that Python has access to.
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,14 +21,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)&j2t@j)4dgbh)zqq2(pm$0p2ys7m@ko8l$60wp@0ddai3$ou!'
+# * If DJANGO_SECRET_KEY not provided then decouple breaks the application.
+# ! python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+SECRET_KEY = config("DJANGO_SECRET_KEY")
+# print(SECRET_KEY)
 # SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)&j2t@j)4dgbh)zqq2(pm$0p2ys7m@ko8l$60wp@0ddai3$ou!')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # * cmd to include environment variable : DJANGO_DEBUG=True python manage.py runserver
+# * echo $DJANGO_DEBUG  # To see value in terminal
 # ! Environment variables are read as or exported as strings.
-DEBUG = os.environ.get("DJANGO_DEBUG").lower() == "true"
-print("DEBUG", DEBUG, type(os.environ.get("DJANGO_DEBUG")))
+# DEBUG = os.environ.get("DJANGO_DEBUG").lower() == "true"
+
+# *use with python-decouple. It gives first priority to os env variables and then dotenv file. But can access both thus code remains same
+# * unset DJANGO_DEBUG # Helps remove environment variable
+DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)  # DJANGO_DEBUG=True or 1 // False or 0. Both works.
+
+# print("DEBUG", DEBUG)
 
 # On which servers this application can be run
 ALLOWED_HOSTS = [
