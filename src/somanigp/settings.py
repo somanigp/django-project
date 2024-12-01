@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os # * Use Operating System that Python has access to.
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,8 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)&j2t@j)4dgbh)zqq2(pm$0p2ys7m@ko8l$60wp@0ddai3$ou!'
 # SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)&j2t@j)4dgbh)zqq2(pm$0p2ys7m@ko8l$60wp@0ddai3$ou!')
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# * cmd to include environment variable : DJANGO_DEBUG=True python manage.py runserver
+# ! Environment variables are read as or exported as strings.
+DEBUG = os.environ.get("DJANGO_DEBUG").lower() == "true"
+print("DEBUG", DEBUG, type(os.environ.get("DJANGO_DEBUG")))
 
 # On which servers this application can be run
 ALLOWED_HOSTS = [
@@ -87,9 +91,14 @@ WSGI_APPLICATION = 'somanigp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# python manage.py migrate
+# Operations to perform:
+#   Apply all migrations: admin, auth, contenttypes, sessions, visits
+# Running migrations:
+#   No migrations to apply. # * When no changes to database mapping needed.
 
 DATABASES = {
-    # By default - local database
+    # By default - local database. django will by default create a sqlite3 database if one doesn't exist. Migrate command applies changes to database and creates it in local if it doesn't exist.
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
