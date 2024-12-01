@@ -1,40 +1,26 @@
 # # django will be installed in python environment.
-# FROM python:3.11.10-alpine3.20
-
-# # Set the working directory inside the container
-# WORKDIR /app
-
-# # Copy requirements file
-# COPY requirements.txt .
-
-# # Install dependencies
-# RUN pip install --no-cache-dir -r requirements.txt
-
-# # Copy project files. /app is workspace directory.
-# COPY . .
-
-# # Expose the port your Django app runs on. NOTE: http://127.0.0.1:8000/. Here 127.0.0.1 is localhost and 8000 is port
-# EXPOSE 8000
-
-# # Define the command to run your Django app
-# CMD ["python", "manage.py", "runserver"]
 
 # Set the python version as a build-time argument
-# with Python 3.12 as the default
+# with Python 3.12 as the default. Can be changed during docker build.
+# docker build --build-arg PYTHON_VERSION=3.9-slim-buster -t my-django-app .
 ARG PYTHON_VERSION=3.12-slim-bullseye
 FROM python:${PYTHON_VERSION}
 
-# Create a virtual environment
+# Create a virtual environment. /opt/venv: This is the directory where the virtual environment will be created. /opt is a standard directory on Linux systems for optional or third-party software.
 RUN python -m venv /opt/venv
 
-# Set the virtual environment as the current location
+# Set the virtual environment as the current location. The PATH variable specifies the directories where the operating system searches for executable files when you run a command without providing the full path.
+# After creating the virtual environment at /opt/venv, this ensures that when you run commands like python or pip inside the container, the versions within the virtual environment are used first, instead of any system-wide Python installations. This keeps your project's dependencies isolated and prevents conflicts.
+# If the original PATH was /usr/local/bin:/usr/bin:/bin, after this command, the new PATH will be /opt/venv/bin:/usr/local/bin:/usr/bin:/bin. 
 ENV PATH=/opt/venv/bin:$PATH
 
 # Upgrade pip
 RUN pip install --upgrade pip
 
 # Set Python-related environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
+# This prevents Python from writing .pyc files (compiled bytecode). .pyc files are normally used for optimization, but they can sometimes cause issues in containerized environments
+ENV PYTHONDONTWRITEBYTECODE 1  
+# This forces Python to buffer output less. Normally, output might be buffered (held temporarily in memory) before being written to the terminal or a file. 
 ENV PYTHONUNBUFFERED 1
 
 # Install os dependencies for our mini vm
