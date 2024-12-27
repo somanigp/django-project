@@ -61,6 +61,7 @@ ARG PROJ_NAME="somanigp"
 # create a bash script to run the Django project
 # this script will execute at runtime when
 # the container starts and the database is available
+# PORT:-8000. If PORT is not set, use 8000
 RUN printf "#!/bin/bash\n" > ./paracord_runner.sh && \
     printf "RUN_PORT=\"\${PORT:-8000}\"\n\n" >> ./paracord_runner.sh && \
     printf "python manage.py migrate --no-input\n" >> ./paracord_runner.sh && \
