@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5104a70e-6866-4191-a4bb-59db5fcc7d9b" name="Changes" comment="" />
+    <list default="true" id="5104a70e-6866-4191-a4bb-59db5fcc7d9b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/django-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/django-project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +18,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2pYSczi5yVxypTJXhAmMNzBQw57" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -25,7 +30,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.google.cloudcode.ide_session_index": "20241130_0000",
+    "com.google.cloudcode.ide_session_index": "20241226_0000",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Govind's Library/projects/django-project",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"

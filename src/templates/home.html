@@ -1,6 +1,7 @@
+{% comment %} Extend and Block Work Together {% endcomment %}
 {% extends "base.html" %}
 
-{% comment %} block.super takes the original template block {% endcomment %}
+{% comment %} block.super puts the original template block {% endcomment %}
 {% block page_title %} {{page_title}} - {{ block.super }} {% endblock page_title %}
 
 {% block content %}
@@ -8,6 +9,7 @@
 
 
     {% comment %} include other templates {% endcomment %}
+    {% comment %} The search dir is still set as src/templates in settings.py {% endcomment %}
     {% include "snippets/welcome-user-msg.html" %}  
     {% comment %} <p> {{request.user}}  {{request.method}}  {{request.user.is_authenticated}}</p>  {% endcomment %}
     {% comment %} AnonymousUser GET False Comes from request  {% endcomment %}

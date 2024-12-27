@@ -39,6 +39,7 @@ DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)  # DJANGO_DEBUG=True or
 
 # print("DEBUG", DEBUG)
 
+# When ALLOWED_HOSTS is [], it means all hosts are allowed.
 # On which servers this application can be run
 ALLOWED_HOSTS = [
     # * initial . means sub-domains are allowed
@@ -48,7 +49,7 @@ ALLOWED_HOSTS = [
 # DEBUG is True for local only and thus adding localhost to ALLOWED_HOSTS list when running in local.
 if DEBUG:
     ALLOWED_HOSTS += [
-        "127.0.0.1",
+        "127.0.0.1", # localhost
         "localhost"
     ]
 
@@ -63,7 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my-apps
-    'visits',  # Adding a model
+    'visits',  # Adding a app, but we are only using model in it.
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # Thus html files can access request object.
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
