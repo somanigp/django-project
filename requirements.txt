@@ -1,3 +1,6 @@
 Django>=5.0,<5.1
 gunicorn  # Will install the latest version
 python-decouple
+psycopg[binary]  # For PostgreSQL. Easier to install since it doesn't require a C compiler or PostgreSQL client libraries.The psycopg2 package is a C extension and requires a C compiler at install time. Can also do pip install postgres instead, it will install all the necessary dependencies. https://www.psycopg.org/psycopg3/docs/basic/install.html#local-installation
+# To install libpq-dev on a Windows machine, you need to install the PostgreSQL development libraries. You can do this by installing PostgreSQL and ensuring that the development libraries are included.
+dj-database-url  # To parse the DATABASE_URL environment variable

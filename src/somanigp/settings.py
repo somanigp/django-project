@@ -33,10 +33,9 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 # ! Environment variables are read as or exported as strings.
 # DEBUG = os.environ.get("DJANGO_DEBUG").lower() == "true"
 
-# *use with python-decouple. It gives first priority to os env variables and then dotenv file. But can access both thus code remains same
+# *use with python-decouple. It gives first priority to os env variables and then dotenv file. But can access both thus code remains same. If both are present then os env variable is used.
 # * unset DJANGO_DEBUG # Helps remove environment variable
 DEBUG = config("DJANGO_DEBUG", cast=bool, default=False)  # DJANGO_DEBUG=True or 1 // False or 0. Both works.
-
 # print("DEBUG", DEBUG)
 
 # When ALLOWED_HOSTS is [], it means all hosts are allowed.
@@ -116,6 +115,16 @@ DATABASES = {
     }
 }
 
+CONN_MAX_AGE = config("CONN_MAX_AGE", cast=int, default=30)  # * If connection is not used for 600 seconds then it will be closed.
+DATABASE_URL = config("DATABASE_URL", default=None, cast = str)  # By using default=None, it will use default database if DATABASE_URL is not provided.
+
+if DATABASE_URL:
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL, 
+                                          conn_health_checks=True,  # * If database is not available then it will raise an exception.
+                                          conn_max_age=CONN_MAX_AGE)  # * If connection is not used for 600 seconds then it will be closed.
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

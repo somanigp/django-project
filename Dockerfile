@@ -25,7 +25,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Install os dependencies for our mini vm
 RUN apt-get update && apt-get install -y \
-    # for postgres
+    # for postgres. psycopg2-binary package requires this.
     libpq-dev \
     # for Pillow
     libjpeg-dev \
