@@ -160,7 +160,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# The collectstatic command is used to gather all static files from the various locations in your project (including apps and the STATICFILES_DIRS setting) into a single directory specified by the STATIC_ROOT setting. The web server only needs to be pointed to one directory. Once the static files are collected, the STATIC_ROOT directory can be moved to the static file server or CDN, ensuring that the latest versions of the static files are served.
+# We need to configure staticfiles folder as source, it is not done by default 
+# django can push static files to production CDN server and use them.
+
+# * URL to 'use' when referring to static files located in STATIC_ROOT
 STATIC_URL = 'static/'
+STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"  # * This is the folder where all static files are stored. BASE_DIR is src folder.
+STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / "vendors"  # * Vendor files like bootstrap, jquery etc.
+
+# * Additional locations the staticfiles app will traverse. 
+# ** Source for python manage.py collectstatic
+STATICFILES_DIRS = [
+    STATICFILES_BASE_DIR,
+]
+
+# * If you use django.contrib.staticfiles as explained above, runserver will do this automatically when DEBUG is set to True/False.
+# * Thus in local development you need not create local-cdn folder and run collectstatic command.
+# * Directory where collectstatic will collect static files for production.
+# * Output of collectstatic command will be stored here.
+# local cdn for development, in long term shift to a prod cdn
+STATIC_ROOT = BASE_DIR.parent / "local-cdn"
+
+# if not DEBUG:  # In prod
+#     STATIC_ROOT = BASE_DIR / "prod-cdn"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

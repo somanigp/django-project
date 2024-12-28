@@ -1,3 +1,8 @@
+# ignore vendor static files
+src/staticfiles/vendors
+# local static files, local-cdn/ anywhere in the repo will be ignored.
+local-cdn/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

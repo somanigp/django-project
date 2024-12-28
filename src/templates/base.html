@@ -2,18 +2,22 @@
 <html>
 <head>
     <title> {% block page_title %} somanigp {% endblock page_title %} </title>
+    {% comment %} Flowbite through CDN (Content Delivery Network) {% endcomment %}
+    {% include 'base/css.html'%}
 </head>
 <body>
-
-    <h1>This is {{page_title}}!</h1>
+    {%include 'nav/navbar.html'%}
+    {% comment %} <h1>This is {{page_title}}!</h1> {% endcomment %}
 
     {% comment %} 'content' is name of the block. {% endcomment %}
     {% block content %}  
     {% comment %} This gets replaced in the file which extends this file. {% endcomment %}
-    <p> This will be replaced. </p>
+    {% comment %} <p> This will be replaced. </p> {% endcomment %}
     {% endblock content %}
 
-    <p> Come Again</p>
+    {% comment %} <p> Come Again</p> {% endcomment %}
+
+    {%include 'base/js.html'%}
 
 </body>
 </html>

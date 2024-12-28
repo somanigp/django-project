@@ -1,0 +1,5 @@
+{% load static %}  
+{% comment %} load static, to reference files from static folder/cdn folder. {% endcomment %}
+<link href="{% static 'vendors/flowbite.min.css'%}" rel="stylesheet" />
+{% comment %} In the long run don't use CDN as to manage these files ourselves and thus are not subject to third party vulnerabilities using CDN managed by somebody else. {% endcomment %}
+
